@@ -23,7 +23,7 @@ layers:
   - U
   - I
   - O
-  - A
+  - P
   - {t: \, s: '|'}
   - $$mdi:apple-keyboard-caps$$
   - A
