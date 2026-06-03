@@ -1,9 +1,10 @@
 #define DEFAULT 0
-#define SYM     1
-#define FUN     2
-#define MOUSE   3
-#define SCROLL  4
-#define SNIPE   5
+#define NUM     1
+#define SYM     2
+#define FUN     3
+#define MOUSE   4
+#define SCROLL  5
+#define SNIPE   6
 
 #include <behaviors/mouse_keys.dtsi>
 #include <dt-bindings/zmk/mouse.h>
@@ -31,6 +32,13 @@
             #binding-cells = <0>;
             tapping-term-ms = <220>;
             bindings = <&none>, <&tog 5>;
+        };
+
+        td_default_layer: td_default_layer {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <220>;
+            bindings = <&none>, <&to DEFAULT>;
         };
 
         scroll_hold_lock: scroll_hold_lock {
@@ -75,7 +83,7 @@
 &trans  &trans           &trans        &trans        &trans        &trans                       &trans          &trans         &trans            &trans                &trans                 &trans
 &trans  &bt BT_CLR       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &trans                       &kp MINUS       &kp EQUAL      &kp LEFT_BRACKET  &kp RIGHT_BRACKET     &trans                 &trans
 &trans  &trans           &trans        &trans        &trans        &trans       &trans  &trans  &kp UNDERSCORE  &kp PLUS       &trans            &trans                &trans                 &trans
-&trans  &trans           &trans        &trans        &trans        &trans       &trans  &trans  &trans                                                                 &trans                 &trans
+&trans  &trans           &trans        &trans        &trans        &trans       &td_default_layer  &trans  &trans                                                                 &trans                 &trans
             >;
         };
 
@@ -86,7 +94,7 @@
 &trans  &kp F1  &kp F2   &kp F3   &kp F4   &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans   &trans   &trans   &trans  &trans  &trans  &trans                          &trans  &trans
+&trans  &trans  &trans   &trans   &trans   &trans  &td_default_layer  &trans  &trans                          &trans  &trans
             >;
         };
 
