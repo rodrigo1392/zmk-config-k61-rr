@@ -207,12 +207,44 @@ Notas importantes de esa referencia:
 - `keyball61_left...uf2` es el firmware del lado izquierdo.
 - `settings_reset...uf2` es para resetear settings/pairings; no es firmware de
   uso normal.
-- Si un push falla por ramas divergentes:
+- Para evitar el error `Updates were rejected because the remote contains work
+  that you do not`, actualizar la rama local antes de pushear:
 
 ```bash
-git pull --rebase
+git fetch origin
+git rebase origin/main
 git push
 ```
+
+- Si ya hiciste commits locales y el `git push` fue rechazado, usar el mismo
+  flujo:
+
+```bash
+git fetch origin
+git rebase origin/main
+git push
+```
+
+- Si tenes cambios locales sin commit y queres traer lo remoto sin perderlos:
+
+```bash
+git pull --rebase --autostash
+git push
+```
+
+- Si durante el rebase aparecen conflictos:
+
+```bash
+git status
+# editar los archivos con conflicto
+git add archivo-corregido
+git rebase --continue
+git push
+```
+
+- No usar `git push --force` para resolver este caso. Si alguna vez hace falta
+  reescribir el remoto, usarlo solo con intencion clara y preferir
+  `git push --force-with-lease`.
 
 - Si GitHub Actions falla, mirar:
 
