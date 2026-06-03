@@ -207,6 +207,34 @@ Notas importantes de esa referencia:
 - `keyball61_left...uf2` es el firmware del lado izquierdo.
 - `settings_reset...uf2` es para resetear settings/pairings; no es firmware de
   uso normal.
+- Si GitHub Actions compilo y pusheo una nueva version del repo, antes de seguir
+  trabajando localmente hay que traer esos cambios. La copia local quedo atras
+  respecto de GitHub:
+
+```bash
+git fetch origin
+git rebase origin/main
+```
+
+- Despues de eso, seguir el flujo normal:
+
+```bash
+# editar archivos
+git status
+git add .
+git commit -m "descripcion del cambio"
+git push
+```
+
+- Regla practica al empezar una sesion local, especialmente si GitHub Actions
+  pudo haber pusheado el drawer o algun archivo generado:
+
+```bash
+git status --short --branch
+git fetch origin
+git rebase origin/main
+```
+
 - Para evitar el error `Updates were rejected because the remote contains work
   that you do not`, actualizar la rama local antes de pushear:
 

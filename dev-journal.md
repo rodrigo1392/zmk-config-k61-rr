@@ -149,7 +149,18 @@ localmente.
 ## Cambios recientes relevantes
 
 - `SCROLL` tiene un behavior con hold momentaneo y doble tap para lock; dentro
-  de `SCROLL`, la misma tecla apaga el lock.
+  de `SCROLL`, la misma tecla apaga el lock. El doble tap de scroll usa
+  `tapping-term-ms = <350>` para permitir una pulsacion menos rapida.
 - Los pulgares izquierdos principales y un pulgar derecho fueron simplificados
   a `SPACE`.
-- En `SCROLL`, `[` va a `FUN`, `]` va a `SYM`, `G` es `PgUp`, `B` es `PgDn`.
+- La tecla mas a la izquierda del pulgar derecho replica el behavior de la tecla
+  de scroll: hold momentaneo a `SCROLL`, doble tap para lock.
+- En `SCROLL`, `[` activa `FUN` momentaneamente y `]` activa `SYM`
+  momentaneamente; `G` es `PgUp`, `B` es `PgDn`.
+- En `SCROLL`, las posiciones que en default son `SPACE` pasan a ser `ENTER`.
+- En `SCROLL`, `Z` dispara una macro que escribe
+  `rodrigo.m.rivero13@gmail.com`.
+- El umbral de movimiento accidental del PMW3610 esta en
+  `CONFIG_PMW3610_MOVEMENT_THRESHOLD=5`.
+- El automouse se desactiva rapido:
+  `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=400`.
