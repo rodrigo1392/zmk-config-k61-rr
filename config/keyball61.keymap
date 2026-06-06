@@ -5,8 +5,10 @@
 #define MOUSE   4
 #define SCROLL  5
 #define SNIPE   6
-#define LOCK    7
-#define TBLOCK  8
+#define LSCROLL 7
+#define RSCROLL 8
+#define LOCK    9
+#define TBLOCK  10
 
 #include <behaviors/mouse_keys.dtsi>
 #include <dt-bindings/zmk/mouse.h>
@@ -50,6 +52,20 @@
             bindings = <&tog SCROLL>, <&tog MOUSE>;
         };
 
+        td_fun_toggle: td_fun_toggle {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&none>, <&tog FUN>;
+        };
+
+        td_sym_toggle: td_sym_toggle {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&none>, <&tog SYM>;
+        };
+
         td_default_layer: td_default_layer {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -71,6 +87,22 @@
             tapping-term-ms = <200>;
             flavor = "hold-preferred";
             bindings = <&mo>, <&td_mouse_lock>;
+        };
+
+        fun_hold_toggle: fun_hold_toggle {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "hold-preferred";
+            bindings = <&mo>, <&td_fun_toggle>;
+        };
+
+        sym_hold_toggle: sym_hold_toggle {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "hold-preferred";
+            bindings = <&mo>, <&td_sym_toggle>;
         };
     };
 
@@ -98,7 +130,6 @@
         combo_thumb_lock {
             timeout-ms = <80>;
             key-positions = <54 55 58>;
-            layers = <SCROLL LOCK>;
             bindings = <&tog LOCK>;
         };
 
@@ -127,7 +158,7 @@
 &kp TAB         &kp Q      &kp W         &kp E         &kp R   &kp T                                    &kp Y            &kp U   &kp I      &kp O    &kp P          &kp BACKSLASH
 &kp ESC         &kp A      &kp S         &kp D         &kp F   &kp G                                    &kp H            &kp J   &kp K      &kp L    &kp SEMI       &kp SQT
 &kp LEFT_SHIFT  &kp Z      &kp X         &kp C         &kp V   &kp B        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp N            &kp M   &kp COMMA  &kp DOT  &kp FSLH       &kp RIGHT_SHIFT
-&kp LCTRL       &kp LEFT_WIN  &kp LEFT_ALT  &kp MINUS  &kp SPACE  &kp SPACE  &scroll_hold_lock SCROLL 0  &scroll_hold_mouse_lock SCROLL 0    &kp SPACE                              &kp RIGHT_ALT  &kp ENTER
+&kp LCTRL       &kp LEFT_WIN  &kp LEFT_ALT  &kp MINUS  &kp SPACE  &kp SPACE  &scroll_hold_lock LSCROLL 0  &scroll_hold_mouse_lock RSCROLL 0    &kp SPACE                              &kp RIGHT_ALT  &kp ENTER
             >;
         };
 
@@ -172,14 +203,14 @@
 &trans  &trans        &kp LEFT      &kp DOWN    &kp UP           &kp RIGHT                   &trans        &trans          &trans      &trans           &trans      &trans
 &trans  &mkp RCLK     &mkp MCLK     &mkp LCLK   &trans           &trans                      &trans      &mkp LCLK     &mkp RCLK   &mkp RCLK  &trans     &trans
 &trans  &trans        &trans        &trans      &kp PAGE_DOWN    &kp PAGE_UP  &trans  &trans  &kp PAGE_UP  &kp PAGE_DOWN   &trans      &trans  &trans  &trans
-&trans  &trans        &trans        &trans      &trans           &trans       &scroll_hold_mouse_lock SCROLL 0  &scroll_hold_mouse_lock SCROLL 0  &mo 3                                             &trans      &trans
+&trans  &trans        &trans        &trans      &trans           &trans       &scroll_hold_mouse_lock LSCROLL 0  &scroll_hold_mouse_lock RSCROLL 0  &mo 3                                             &trans      &trans
             >;
         };
 
         scroll_layer {
             label = "SCROLL";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &scroll_to_fun
+&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &scroll_to_fun
 &trans  &trans  &trans  &trans  &trans  &trans                  &kp N7  &kp N8     &kp N9    &trans    &trans     &trans
 &trans  &trans  &trans  &trans  &trans  &kp PAGE_UP             &kp N4  &kp N5     &kp N6    &trans    &kp UP  &trans
 &trans  &email_rodrigo  &trans  &trans  &trans  &kp PAGE_DOWN  &mo FUN  &kp N0  &kp N1  &kp N2     &kp N3    &kp LEFT    &kp DOWN  &kp RIGHT
@@ -195,6 +226,28 @@
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                          &trans  &trans
+            >;
+        };
+
+        left_scroll_layer {
+            label = "LSCROLL";
+            bindings = <
+&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &fun_hold_toggle FUN 0
+&trans  &trans  &trans  &trans  &trans  &trans                  &kp N7  &kp N8     &kp N9    &trans    &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &kp PAGE_UP             &kp N4  &kp N5     &kp N6    &trans    &kp UP  &trans
+&trans  &email_rodrigo  &trans  &trans  &trans  &kp PAGE_DOWN  &mo FUN  &kp N0  &kp N1  &kp N2     &kp N3    &kp LEFT    &kp DOWN  &kp RIGHT
+&trans  &trans  &trans  &trans  &kp ENTER  &kp ENTER  &td_scroll_off_mouse_lock   &td_scroll_off_mouse_lock  &kp ENTER                          &trans  &trans
+            >;
+        };
+
+        right_scroll_layer {
+            label = "RSCROLL";
+            bindings = <
+&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &sym_hold_toggle SYM 0
+&trans  &trans  &trans  &trans  &trans  &trans                  &kp N7  &kp N8     &kp N9    &trans    &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &kp PAGE_UP             &kp N4  &kp N5     &kp N6    &trans    &kp UP  &trans
+&trans  &email_rodrigo  &trans  &trans  &trans  &kp PAGE_DOWN  &mo FUN  &kp N0  &kp N1  &kp N2     &kp N3    &kp LEFT    &kp DOWN  &kp RIGHT
+&trans  &trans  &trans  &trans  &kp ENTER  &kp ENTER  &td_scroll_off_mouse_lock   &td_scroll_off_mouse_lock  &kp ENTER                          &trans  &trans
             >;
         };
 

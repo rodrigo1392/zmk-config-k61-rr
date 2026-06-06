@@ -113,10 +113,12 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
 - Vault local de firmwares probados: `vault/`.
 - Trackball:
   - `automouse-layer = <4>`
-  - `scroll-layers = <5>`
+  - `scroll-layers = <5 7 8>`
   - `snipe-layers = <6>`
-  - `LOCK = 7`, usado para bloquear teclado y trackball al mover el teclado.
-  - `TBLOCK = 8`, usado para neutralizar solo el trackball dejando el keymap
+  - `LSCROLL = 7` y `RSCROLL = 8`, variantes momentaneas de `SCROLL` para
+    distinguir la tecla scroll izquierda/derecha.
+  - `LOCK = 9`, usado para bloquear teclado y trackball al mover el teclado.
+  - `TBLOCK = 10`, usado para neutralizar solo el trackball dejando el keymap
     activo.
   - `CONFIG_PMW3610_CPI=1200`
   - `CONFIG_PMW3610_CPI_DIVIDOR=1`
@@ -163,21 +165,26 @@ localmente.
 - En `SCROLL`, las posiciones que en default son `SPACE` pasan a ser `ENTER`.
 - En `SCROLL`, `Z` dispara una macro que escribe
   `rodrigo.m.rivero13@gmail.com`.
-- `LOCK` se activa/desactiva desde `SCROLL` presionando juntas las posiciones
-  thumb 54, 55 y 58. La layer usa `&none` en todas las teclas para no caer a
-  layers inferiores.
+- `LOCK` se activa/desactiva presionando juntas las posiciones thumb 54, 55 y
+  58, sin importar la layer activa. La layer usa `&none` en todas las teclas
+  para no caer a layers inferiores.
 - En `LOCK` y `TBLOCK`, `keyball61_right.overlay` usa una `ball action` del
   driver PMW3610 con cuatro bindings `&none`; como son layers altas, esto
   neutraliza movimiento, scroll y automouse del trackball mientras esten activas.
-- La tecla scroll izquierda mantiene doble tap para toggle de `SCROLL`; la tecla
-  scroll derecha mantiene hold a `SCROLL`, pero doble tap hace toggle de `MOUSE`.
-  En `MOUSE`, ambas teclas scroll hacen hold a `SCROLL` y doble tap apaga
-  `MOUSE`.
+- La tecla scroll izquierda hace hold a `LSCROLL` y doble tap toggle de
+  `SCROLL`; la tecla scroll derecha hace hold a `RSCROLL` y doble tap toggle de
+  `MOUSE`. En `MOUSE`, ambas teclas scroll hacen hold a `LSCROLL`/`RSCROLL` y
+  doble tap apaga `MOUSE`.
 - `MOUSE` no tiene atajos multimedia en la fila superior; en esa layer `A/S/D`
   son click derecho/medio/izquierdo.
 - `FUN` tiene los atajos multimedia en la fila superior, en las mismas posiciones
   donde antes estaban en `MOUSE`.
 - En `SCROLL`, las posiciones `6/7/8/9` son `+/*/-//`.
+- En `SCROLL`, la tecla `` ` `` hace toggle de `TBLOCK`: apaga/enciende solo el
+  trackball y deja las teclas funcionando por transparencia.
+- En `LSCROLL`, `BSPC` sostenido activa `FUN` momentaneamente y doble tap hace
+  toggle de `FUN`. En `RSCROLL`, `BSPC` sostenido activa `SYM` momentaneamente y
+  doble tap hace toggle de `SYM`.
 - El umbral de movimiento accidental del PMW3610 esta en
   `CONFIG_PMW3610_MOVEMENT_THRESHOLD=5`.
 - El automouse se desactiva rapido:
