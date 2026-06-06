@@ -116,6 +116,8 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
   - `scroll-layers = <5>`
   - `snipe-layers = <6>`
   - `LOCK = 7`, usado para bloquear teclado y trackball al mover el teclado.
+  - `TBLOCK = 8`, usado para neutralizar solo el trackball dejando el keymap
+    activo.
   - `CONFIG_PMW3610_CPI=1200`
   - `CONFIG_PMW3610_CPI_DIVIDOR=1`
   - `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=700`
@@ -164,9 +166,17 @@ localmente.
 - `LOCK` se activa/desactiva desde `SCROLL` presionando juntas las posiciones
   thumb 54, 55 y 58. La layer usa `&none` en todas las teclas para no caer a
   layers inferiores.
-- En `LOCK`, `keyball61_right.overlay` usa una `ball action` del driver PMW3610
-  con cuatro bindings `&none`; como `LOCK` es la layer mas alta, esto neutraliza
-  movimiento, scroll y automouse del trackball mientras el bloqueo esta activo.
+- En `LOCK` y `TBLOCK`, `keyball61_right.overlay` usa una `ball action` del
+  driver PMW3610 con cuatro bindings `&none`; como son layers altas, esto
+  neutraliza movimiento, scroll y automouse del trackball mientras esten activas.
+- La tecla scroll izquierda mantiene doble tap para toggle de `SCROLL`; la tecla
+  scroll derecha mantiene hold a `SCROLL`, pero doble tap hace toggle de `MOUSE`.
+  En `MOUSE`, ambas teclas scroll hacen hold a `SCROLL` y doble tap apaga
+  `MOUSE`.
+- En `SCROLL`, la tecla `` ` `` hace toggle de `TBLOCK`: apaga/enciende solo el
+  trackball y deja las teclas funcionando por transparencia.
+- En `SCROLL`, `BSPC` ejecuta una macro que apaga `SCROLL` y deja `FUN`
+  toggled; en `FUN`, cualquiera de las dos teclas scroll apaga `FUN`.
 - El umbral de movimiento accidental del PMW3610 esta en
   `CONFIG_PMW3610_MOVEMENT_THRESHOLD=5`.
 - El automouse se desactiva rapido:

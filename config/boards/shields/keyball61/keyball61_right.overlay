@@ -68,7 +68,7 @@
         snipe-layers = <6>;
 
         trackball_lock {
-            layers = <7>;
+            layers = <7 8>;
             bindings = <&none>, <&none>, <&none>, <&none>;
             tick = <1>;
         };
