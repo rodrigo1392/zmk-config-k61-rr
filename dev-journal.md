@@ -173,10 +173,11 @@ localmente.
   scroll derecha mantiene hold a `SCROLL`, pero doble tap hace toggle de `MOUSE`.
   En `MOUSE`, ambas teclas scroll hacen hold a `SCROLL` y doble tap apaga
   `MOUSE`.
-- En `SCROLL`, la tecla `` ` `` hace toggle de `TBLOCK`: apaga/enciende solo el
-  trackball y deja las teclas funcionando por transparencia.
-- En `SCROLL`, `BSPC` ejecuta una macro que apaga `SCROLL` y deja `FUN`
-  toggled; en `FUN`, cualquiera de las dos teclas scroll apaga `FUN`.
+- `MOUSE` no tiene atajos multimedia en la fila superior; en esa layer `A/S/D`
+  son click derecho/medio/izquierdo.
+- `FUN` tiene los atajos multimedia en la fila superior, en las mismas posiciones
+  donde antes estaban en `MOUSE`.
+- En `SCROLL`, las posiciones `6/7/8/9` son `+/*/-//`.
 - El umbral de movimiento accidental del PMW3610 esta en
   `CONFIG_PMW3610_MOVEMENT_THRESHOLD=5`.
 - El automouse se desactiva rapido:
