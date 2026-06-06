@@ -12,6 +12,7 @@ UF2 correcto en el lado correspondiente del teclado.
 
 Elegir el archivo segun la parte fisica o comportamiento que se quiere controlar:
 
+- Velocidad de raton `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS` en `keyball_right.conf`.
 - `config/keyball61.keymap`
   - Teclas, layers, combos visibles en keymap, Bluetooth behaviors, clicks del
     mouse en la layer `MOUSE`, controles multimedia, Page Up/Page Down, etc.

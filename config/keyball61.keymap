@@ -5,6 +5,7 @@
 #define MOUSE   4
 #define SCROLL  5
 #define SNIPE   6
+#define LOCK    7
 
 #include <behaviors/mouse_keys.dtsi>
 #include <dt-bindings/zmk/mouse.h>
@@ -57,6 +58,17 @@
             wait-ms = <40>;
             tap-ms = <40>;
             bindings = <&kp R &kp O &kp D &kp R &kp I &kp G &kp O &kp DOT &kp M &kp DOT &kp R &kp I &kp V &kp E &kp R &kp O &kp N1 &kp N3 &kp AT_SIGN &kp G &kp M &kp A &kp I &kp L &kp DOT &kp C &kp O &kp M>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_thumb_lock {
+            timeout-ms = <80>;
+            key-positions = <54 55 58>;
+            layers = <SCROLL LOCK>;
+            bindings = <&tog LOCK>;
         };
     };
 
@@ -138,6 +150,17 @@
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                          &trans  &trans
+            >;
+        };
+
+        lock_layer {
+            label = "LOCK";
+            bindings = <
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none                          &none  &none
             >;
         };
     };

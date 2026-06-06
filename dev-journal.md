@@ -115,6 +115,7 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
   - `automouse-layer = <4>`
   - `scroll-layers = <5>`
   - `snipe-layers = <6>`
+  - `LOCK = 7`, usado para bloquear teclado y trackball al mover el teclado.
   - `CONFIG_PMW3610_CPI=1200`
   - `CONFIG_PMW3610_CPI_DIVIDOR=1`
   - `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=700`
@@ -160,6 +161,12 @@ localmente.
 - En `SCROLL`, las posiciones que en default son `SPACE` pasan a ser `ENTER`.
 - En `SCROLL`, `Z` dispara una macro que escribe
   `rodrigo.m.rivero13@gmail.com`.
+- `LOCK` se activa/desactiva desde `SCROLL` presionando juntas las posiciones
+  thumb 54, 55 y 58. La layer usa `&none` en todas las teclas para no caer a
+  layers inferiores.
+- En `LOCK`, `keyball61_right.overlay` usa una `ball action` del driver PMW3610
+  con cuatro bindings `&none`; como `LOCK` es la layer mas alta, esto neutraliza
+  movimiento, scroll y automouse del trackball mientras el bloqueo esta activo.
 - El umbral de movimiento accidental del PMW3610 esta en
   `CONFIG_PMW3610_MOVEMENT_THRESHOLD=5`.
 - El automouse se desactiva rapido:

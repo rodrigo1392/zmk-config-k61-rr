@@ -5,6 +5,7 @@
  */
  
 #include "keyball61.dtsi"
+#include <behaviors.dtsi>
 
 &default_transform {
     col-offset = <7>;
@@ -63,8 +64,14 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         automouse-layer = <4>;
-		scroll-layers = <5>;
-		snipe-layers = <6>;
+        scroll-layers = <5>;
+        snipe-layers = <6>;
+
+        trackball_lock {
+            layers = <7>;
+            bindings = <&none>, <&none>, <&none>, <&none>;
+            tick = <1>;
+        };
     };
 };
 
