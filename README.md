@@ -12,7 +12,8 @@ UF2 correcto en el lado correspondiente del teclado.
 
 Elegir el archivo segun la parte fisica o comportamiento que se quiere controlar:
 
-- Velocidad de raton `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS` en `keyball_right.conf`.
+- Velocidad de raton con `CONFIG_PMW3610_CPI` y
+  `CONFIG_PMW3610_CPI_DIVIDOR` en `keyball61_right.conf`.
 - `config/keyball61.keymap`
   - Teclas, layers, combos visibles en keymap, Bluetooth behaviors, clicks del
     mouse en la layer `MOUSE`, controles multimedia, Page Up/Page Down, etc.
@@ -20,8 +21,7 @@ Elegir el archivo segun la parte fisica o comportamiento que se quiere controlar
 
 - `config/boards/shields/keyball61/keyball61_right.conf`
   - Config del lado derecho.
-  - Trackball PMW3610: velocidad/CPI, divisor CPI, scroll, snipe, timeout de
-    automouse.
+  - Trackball PMW3610: velocidad/CPI, divisor CPI, scroll y snipe.
   - ZMK Studio en el lado derecho.
   - Como el lado derecho es central/master, muchos cambios se prueban
     flasheando solo este lado.
@@ -29,7 +29,7 @@ Elegir el archivo segun la parte fisica o comportamiento que se quiere controlar
 - `config/boards/shields/keyball61/keyball61_right.overlay`
   - Pines y hardware del lado derecho.
   - Sensor del trackball.
-  - `automouse-layer`, `scroll-layers`, `snipe-layers`.
+  - Bloqueo del trackball por layer, `scroll-layers`, `snipe-layers`.
   - Tocar con cuidado: esto ya es hardware/firmware, no simple layout.
 
 - `config/boards/shields/keyball61/keyball61_left.conf`
@@ -97,7 +97,7 @@ Ejemplos:
 
 ```bash
 git commit -m "ajusta clicks y movimiento en layer mouse"
-git commit -m "sube velocidad del trackball y timeout automouse"
+git commit -m "sube velocidad del trackball"
 git commit -m "agrega controles multimedia en layer mouse"
 ```
 
@@ -291,13 +291,11 @@ gh run view --log-failed
 - Para cambiar velocidad del trackball:
   - editar `config/boards/shields/keyball61/keyball61_right.conf`;
   - `CONFIG_PMW3610_CPI` y `CONFIG_PMW3610_CPI_DIVIDOR` controlan velocidad;
-  - menor divisor = mas rapido;
-  - `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS` controla cuanto dura la layer mouse
-    despues de mover la bola.
+  - menor divisor = mas rapido.
 
-- Para cambiar que layer activa el trackball:
+- Para cambiar como se bloquea o desbloquea el trackball por layer:
   - editar `config/boards/shields/keyball61/keyball61_right.overlay`;
-  - revisar `automouse-layer`, `scroll-layers`, `snipe-layers`.
+  - revisar `trackball_lock`, `scroll-layers`, `snipe-layers`.
 
 - Para cambiar clicks:
   - editar layer `MOUSE` en `config/keyball61.keymap`;

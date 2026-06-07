@@ -70,10 +70,10 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
 - `config/keyball61.conf`: configuracion general Bluetooth/display/split.
 - `config/keyball61.keymap`: keymap principal; este suele ser el archivo mas
   editado.
-- `config/boards/shields/keyball61/keyball61_right.conf`: CPI, scroll, snipe,
-  timeout de automouse y ZMK Studio.
-- `config/boards/shields/keyball61/keyball61_right.overlay`: `automouse-layer`,
-  `scroll-layers`, `snipe-layers`, SPI/I2C y trackball.
+- `config/boards/shields/keyball61/keyball61_right.conf`: CPI, scroll, snipe y
+  ZMK Studio.
+- `config/boards/shields/keyball61/keyball61_right.overlay`: bloqueo de
+  trackball por layer, `scroll-layers`, `snipe-layers`, SPI/I2C y trackball.
 - `keymap-drawer/keyball61.yaml` y `.svg`: salida visual/generada del keymap.
 
 ## Convenciones importantes
@@ -112,7 +112,7 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
 - Artifact esperado de Actions: `firmware.zip`.
 - Vault local de firmwares probados: `vault/`.
 - Trackball:
-  - `automouse-layer = <4>`
+  - No usar `automouse-layer`; `MOUSE` se activa solo con la tecla MOUSE.
   - `scroll-layers = <5 8>`
   - `snipe-layers = <6>`
   - `MOUSET = 7` y `SCROLLT = 8`, variantes toggled de `MOUSE` y `SCROLL`
@@ -122,7 +122,8 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
     activo.
   - `CONFIG_PMW3610_CPI=1200`
   - `CONFIG_PMW3610_CPI_DIVIDOR=1`
-  - `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=700`
+  - `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=1500`, actualmente irrelevante porque
+    no hay `automouse-layer` en el overlay.
 
 ## Secretos y entorno
 
@@ -175,19 +176,29 @@ localmente.
   `SCROLLT` (`SCROLL-T`). La tecla scroll derecha hace hold a `SCROLL` y doble
   tap toggle de `MOUSET` (`MOUSE-T`). En `MOUSE` y `MOUSET`, ambas teclas scroll
   hacen hold a `SCROLL` y doble tap alterna `MOUSET`.
-- `MOUSE` no tiene atajos multimedia en la fila superior; en esa layer `A/S/D`
-  son click derecho/medio/izquierdo.
-- `FUN` tiene los atajos multimedia en la fila superior, en las mismas posiciones
-  donde antes estaban en `MOUSE`.
+- `FUN` conserva atajos multimedia/F-keys y agrega macro de email en `M`.
 - En `SCROLL`, las posiciones `6/7/8/9` son `+/*/-//`.
 - En `SCROLL`, la tecla `` ` `` hace toggle de `TBLOCK`: apaga/enciende solo el
   trackball y deja las teclas funcionando por transparencia.
-- En `SCROLL` y `SCROLL-T`, `BSPC` sostenido activa `FUN` momentaneamente y
-  doble tap hace toggle de `FUN`.
+- En `SCROLL` y `SCROLL-T`, `BSPC` activa `FUN` con `&sl FUN`; `&sl` esta
+  configurado con `release-after-ms = <1000>`.
 - En `SCROLL` y `SCROLL-T`, la posicion 59 (`RIGHT_ALT` en default; no hay
   `RIGHT_CTRL` mapeado) sostenida activa `SYM` momentaneamente y doble tap hace
   toggle de `SYM`.
 - El umbral de movimiento accidental del PMW3610 esta en
   `CONFIG_PMW3610_MOVEMENT_THRESHOLD=5`.
-- El automouse se desactiva rapido:
-  `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=400`.
+- `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS` puede quedar en la conf, pero no debe
+  afectar mientras `automouse-layer` no este definido en el overlay.
+- Al 2026-06-07, `DEFAULT` bloquea el trackball desde
+  `keyball61_right.overlay` agregando layer `0` a `trackball_lock`; el
+  movimiento no debe activar `MOUSE` automaticamente.
+- La tecla MOUSE es la posicion 57: hold activa `MOUSE`, doble tap alterna
+  `MOUSE-T`. La tecla SCROLL es la posicion 56: hold activa `SCROLL`, doble tap
+  alterna `SCROLL-T`.
+- La posicion 58 es dual-role: hold activa `FUN` momentaneamente y tap envia
+  `SPACE`. En `FUN`, `M` dispara la macro de email y `SCROLL` sostenida activa
+  `SYM`.
+- En `MOUSE` y `MOUSE-T` todo lo no listado usa `&none`. Quedan activos:
+  `6/7/8/9/0` como volumen-/volumen+/play-pausa/prev/next, `A/S/D` como
+  click derecho/medio/izquierdo, `F/V` como PgUp/PgDn, `;/,/.//` como
+  arriba/izquierda/abajo/derecha, `BSPC` como `DEL`, SCROLL y MOUSE.

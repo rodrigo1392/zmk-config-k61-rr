@@ -29,6 +29,10 @@
     quick-tap-ms = <150>;
 };
 
+&sl {
+    release-after-ms = <1000>;
+};
+
 / {
     behaviors {
         td_scroll_t_lock: td_scroll_t_lock {
@@ -43,13 +47,6 @@
             #binding-cells = <0>;
             tapping-term-ms = <350>;
             bindings = <&none>, <&tog MOUSET>;
-        };
-
-        td_fun_toggle: td_fun_toggle {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <350>;
-            bindings = <&none>, <&tog FUN>;
         };
 
         td_sym_toggle: td_sym_toggle {
@@ -82,12 +79,12 @@
             bindings = <&mo>, <&td_mouse_t_lock>;
         };
 
-        fun_hold_toggle: fun_hold_toggle {
+        fun_hold_space: fun_hold_space {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "hold-preferred";
-            bindings = <&mo>, <&td_fun_toggle>;
+            bindings = <&mo>, <&kp>;
         };
 
         sym_hold_toggle: sym_hold_toggle {
@@ -118,6 +115,12 @@
             bindings = <&tog LOCK>;
         };
 
+        combo_mouse_thumb_lock {
+            timeout-ms = <80>;
+            key-positions = <55 57 58>;
+            bindings = <&tog LOCK>;
+        };
+
         combo_right_alt_equal {
             timeout-ms = <50>;
             key-positions = <59 10>;
@@ -131,6 +134,27 @@
             layers = <DEFAULT>;
             bindings = <&kp PLUS>;
         };
+
+        combo_mouse_left_space_enter {
+            timeout-ms = <80>;
+            key-positions = <55 57>;
+            layers = <DEFAULT MOUSE MOUSET>;
+            bindings = <&kp ENTER>;
+        };
+
+        combo_mouse_right_space_enter {
+            timeout-ms = <80>;
+            key-positions = <57 58>;
+            layers = <DEFAULT MOUSE MOUSET>;
+            bindings = <&kp ENTER>;
+        };
+
+        combo_fun_space_enter {
+            timeout-ms = <80>;
+            key-positions = <55 58>;
+            layers = <FUN>;
+            bindings = <&kp ENTER>;
+        };
     };
 
     keymap {
@@ -143,7 +167,7 @@
 &kp TAB         &kp Q      &kp W         &kp E         &kp R   &kp T                                    &kp Y            &kp U   &kp I      &kp O    &kp P          &kp BACKSLASH
 &kp ESC         &kp A      &kp S         &kp D         &kp F   &kp G                                    &kp H            &kp J   &kp K      &kp L    &kp SEMI       &kp SQT
 &kp LEFT_SHIFT  &kp Z      &kp X         &kp C         &kp V   &kp B        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp N            &kp M   &kp COMMA  &kp DOT  &kp FSLH       &kp RIGHT_SHIFT
-&kp LCTRL       &kp LEFT_WIN  &kp LEFT_ALT  &kp MINUS  &kp SPACE  &kp SPACE  &scroll_hold_lock SCROLL 0  &scroll_hold_mouse_lock SCROLL 0    &kp SPACE                              &kp RIGHT_ALT  &kp ENTER
+&kp LCTRL       &kp LEFT_WIN  &kp LEFT_ALT  &kp MINUS  &kp SPACE  &kp SPACE  &scroll_hold_lock SCROLL 0  &scroll_hold_mouse_lock MOUSE 0    &fun_hold_space FUN SPACE                              &kp RIGHT_ALT  &kp ENTER
             >;
         };
 
@@ -176,26 +200,26 @@
 &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_PP  &kp C_PREV  &kp C_NEXT                  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_PP  &kp C_PREV  &kp C_NEXT
 &trans  &kp F1  &kp F2   &kp F3   &kp F4   &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans   &trans   &trans   &trans  &tog FUN  &tog FUN  &trans                          &trans  &trans
+&trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans  &trans  &trans  &trans  &email_rodrigo  &trans  &trans  &trans  &trans
+&trans  &trans  &trans   &trans   &trans   &kp ENTER  &mo SYM  &trans  &trans                          &trans  &trans
             >;
         };
 
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans        &trans        &trans      &trans           &trans                   &trans        &trans          &trans      &trans           &trans      &trans
-&trans  &trans        &kp LEFT      &kp DOWN    &kp UP           &kp RIGHT                   &trans        &trans          &trans      &trans           &trans      &trans
-&trans  &mkp RCLK     &mkp MCLK     &mkp LCLK   &trans           &trans                      &trans      &mkp LCLK     &mkp RCLK   &mkp RCLK  &trans     &trans
-&trans  &trans        &trans        &trans      &kp PAGE_DOWN    &kp PAGE_UP  &trans  &trans  &kp PAGE_UP  &kp PAGE_DOWN   &trans      &trans  &trans  &trans
-&trans  &trans        &trans        &trans      &trans           &trans       &scroll_hold_mouse_lock SCROLL 0  &scroll_hold_mouse_lock SCROLL 0  &mo 3                                             &trans      &trans
+&none  &none        &none        &none      &none           &none                   &kp C_VOL_DN        &kp C_VOL_UP          &kp C_PP      &kp C_PREV           &kp C_NEXT      &kp DEL
+&none  &none        &none      &none    &none           &none                   &none        &none          &none      &none           &none      &none
+&none  &mkp RCLK     &mkp MCLK     &mkp LCLK   &kp PAGE_UP           &none                      &none      &none     &none   &none  &kp UP     &none
+&none  &none        &none        &none      &kp PAGE_DOWN    &none  &none  &none  &none  &none   &kp LEFT      &kp DOWN  &kp RIGHT  &none
+&none  &none        &none        &none      &none           &kp ENTER       &scroll_hold_lock SCROLL 0  &td_mouse_t_lock  &kp ENTER                                             &none      &none
             >;
         };
 
         scroll_layer {
             label = "SCROLL";
             bindings = <
-&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &fun_hold_toggle FUN 0
+&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &sl FUN
 &trans  &trans  &trans  &trans  &trans  &trans                  &kp N7  &kp N8     &kp N9    &trans    &trans     &trans
 &trans  &trans  &trans  &trans  &trans  &kp PAGE_UP             &kp N4  &kp N5     &kp N6    &trans    &kp UP  &trans
 &trans  &email_rodrigo  &trans  &trans  &trans  &kp PAGE_DOWN  &mo FUN  &kp N0  &kp N1  &kp N2     &kp N3    &kp LEFT    &kp DOWN  &kp RIGHT
@@ -217,18 +241,18 @@
         mouse_toggle_layer {
             label = "MOUSE-T";
             bindings = <
-&trans  &trans        &trans        &trans      &trans           &trans                   &trans        &trans          &trans      &trans           &trans      &trans
-&trans  &trans        &kp LEFT      &kp DOWN    &kp UP           &kp RIGHT                   &trans        &trans          &trans      &trans           &trans      &trans
-&trans  &mkp RCLK     &mkp MCLK     &mkp LCLK   &trans           &trans                      &trans      &mkp LCLK     &mkp RCLK   &mkp RCLK  &trans     &trans
-&trans  &trans        &trans        &trans      &kp PAGE_DOWN    &kp PAGE_UP  &trans  &trans  &kp PAGE_UP  &kp PAGE_DOWN   &trans      &trans  &trans  &trans
-&trans  &trans        &trans        &trans      &trans           &trans       &scroll_hold_mouse_lock SCROLL 0  &scroll_hold_mouse_lock SCROLL 0  &mo 3                                             &trans      &trans
+&none  &none        &none        &none      &none           &none                   &kp C_VOL_DN        &kp C_VOL_UP          &kp C_PP      &kp C_PREV           &kp C_NEXT      &kp DEL
+&none  &none        &none      &none    &none           &none                   &none        &none          &none      &none           &none      &none
+&none  &mkp RCLK     &mkp MCLK     &mkp LCLK   &kp PAGE_UP           &none                      &none      &none     &none   &none  &kp UP     &none
+&none  &none        &none        &none      &kp PAGE_DOWN    &none  &none  &none  &none  &none   &kp LEFT      &kp DOWN  &kp RIGHT  &none
+&none  &none        &none        &none      &none           &kp ENTER       &scroll_hold_lock SCROLL 0  &td_mouse_t_lock  &kp ENTER                                             &none      &none
             >;
         };
 
         scroll_toggle_layer {
             label = "SCROLL-T";
             bindings = <
-&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &fun_hold_toggle FUN 0
+&tog TBLOCK  &trans  &trans  &trans  &trans  &trans                  &kp PLUS  &kp ASTERISK  &kp MINUS  &kp FSLH  &trans  &sl FUN
 &trans  &trans  &trans  &trans  &trans  &trans                  &kp N7  &kp N8     &kp N9    &trans    &trans     &trans
 &trans  &trans  &trans  &trans  &trans  &kp PAGE_UP             &kp N4  &kp N5     &kp N6    &trans    &kp UP  &trans
 &trans  &email_rodrigo  &trans  &trans  &trans  &kp PAGE_DOWN  &mo FUN  &kp N0  &kp N1  &kp N2     &kp N3    &kp LEFT    &kp DOWN  &kp RIGHT
