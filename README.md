@@ -6,6 +6,11 @@ Este repo compila firmware UF2 con GitHub Actions. La idea es cambiar archivos
 de configuracion, pushear, descargar el artifact `firmware.zip`, y flashear el
 UF2 correcto en el lado correspondiente del teclado.
 
+Estado actual: `build.yaml` y `config/` fueron restaurados desde el primer
+commit del repo (`1f2f785`, "Add files via upload") para volver a una base tipo
+fabrica. Los archivos de soporte del repo se mantienen para seguir trabajando y
+compilar con GitHub Actions.
+
 ## Para cambiar comportamiento del Keyball61
 
 ### 1. Modificar el archivo correspondiente
@@ -22,7 +27,6 @@ Elegir el archivo segun la parte fisica o comportamiento que se quiere controlar
 - `config/boards/shields/keyball61/keyball61_right.conf`
   - Config del lado derecho.
   - Trackball PMW3610: velocidad/CPI, divisor CPI, scroll y snipe.
-  - ZMK Studio en el lado derecho.
   - Como el lado derecho es central/master, muchos cambios se prueban
     flasheando solo este lado.
 
@@ -70,7 +74,6 @@ include:
     shield: keyball61_left
   - board: nice_nano_v2
     shield: keyball61_right
-    snippet: studio-rpc-usb-uart
   - board: nice_nano_v2
     shield: settings_reset
 ```

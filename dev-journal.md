@@ -33,7 +33,7 @@ El uso normal es editar configuracion, pushear, descargar el artifact
 - `config/boards/shields/keyball61/keyball61_right.overlay`: hardware del lado
   derecho, trackball PMW3610, OLED y layers del trackball.
 - `config/boards/shields/keyball61/keyball61_right.conf`: parametros del
-  trackball y ZMK Studio.
+  trackball.
 - `keymap-drawer/` y `keymap_drawer.config.yaml`: dibujo visual del keymap; no
   cambia el firmware. No regenerarlo localmente; dejar que GitHub Actions lo
   haga.
@@ -70,8 +70,7 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
 - `config/keyball61.conf`: configuracion general Bluetooth/display/split.
 - `config/keyball61.keymap`: keymap principal; este suele ser el archivo mas
   editado.
-- `config/boards/shields/keyball61/keyball61_right.conf`: CPI, scroll, snipe y
-  ZMK Studio.
+- `config/boards/shields/keyball61/keyball61_right.conf`: CPI, scroll y snipe.
 - `config/boards/shields/keyball61/keyball61_right.overlay`: bloqueo de
   trackball por layer, `scroll-layers`, `snipe-layers`, SPI/I2C y trackball.
 - `keymap-drawer/keyball61.yaml` y `.svg`: salida visual/generada del keymap.
@@ -101,8 +100,8 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
 - Firmware ZMK split para Keyball61.
 - Trackball PMW3610 en el lado derecho.
 - OLED SSD1306 en ambos lados.
-- ZMK Studio habilitado en el firmware del lado derecho con snippet
-  `studio-rpc-usb-uart`.
+- ZMK Studio no esta habilitado en la base restaurada; `build.yaml` compila el
+  lado derecho sin snippet.
 - Dibujo automatico/manual del keymap con `keymap-drawer`.
 
 ## Paths y defaults importantes
@@ -112,18 +111,12 @@ imagenes/dibujos localmente; todo eso debe hacerlo GitHub Actions.
 - Artifact esperado de Actions: `firmware.zip`.
 - Vault local de firmwares probados: `vault/`.
 - Trackball:
-  - No usar `automouse-layer`; `MOUSE` se activa solo con la tecla MOUSE.
-  - `scroll-layers = <5 8>`
-  - `snipe-layers = <6>`
-  - `MOUSET = 7` y `SCROLLT = 8`, variantes toggled de `MOUSE` y `SCROLL`
-    etiquetadas como `MOUSE-T` y `SCROLL-T`.
-  - `LOCK = 9`, usado para bloquear teclado y trackball al mover el teclado.
-  - `TBLOCK = 10`, usado para neutralizar solo el trackball dejando el keymap
-    activo.
-  - `CONFIG_PMW3610_CPI=1200`
-  - `CONFIG_PMW3610_CPI_DIVIDOR=1`
-  - `CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS=1500`, actualmente irrelevante porque
-    no hay `automouse-layer` en el overlay.
+  - Base restaurada con layers `DEFAULT`, `SYM`, `FUN`, `MOUSE`, `SCROLL` y
+    `SNIPE`.
+  - `CONFIG_PMW3610_CPI=1200`, traido del ultimo commit antes de restaurar la
+    base.
+  - `CONFIG_PMW3610_CPI_DIVIDOR=1`, traido del ultimo commit antes de restaurar
+    la base.
 
 ## Secretos y entorno
 
@@ -144,6 +137,19 @@ localmente.
 
 ## Estado conocido
 
+- Al 2026-06-07, `build.yaml` y todo `config/` fueron restaurados desde el
+  commit inicial `1f2f785` ("Add files via upload") para volver a una base tipo
+  fabrica. Se mantuvieron los archivos de soporte agregados despues
+  (`README.md`, `dev-journal.md`, workflows, drawer y `vault/`) para seguir
+  trabajando en el repo actual.
+- La base restaurada fue normalizada para quedar como punto de partida estandar:
+  `keyball61.dtsi` usa `zephyr,display = &oled`, corrige la coordenada duplicada
+  del transform en el pulgar izquierdo (`RC(4,5)` en vez de repetir `RC(3,5)`),
+  y `keyball61_right.overlay` declara `snipe-layers = <5>` para mantenerlo
+  sincronizado con `#define SNIPE 5`.
+- Desde esa restauracion, las entradas historicas de "Cambios recientes" pueden
+  describir comportamientos que ya no estan activos en `config/`; tratarlas como
+  historial, no como estado vigente.
 - Al 2026-06-03, la validacion completa es GitHub Actions. No intentar instalar
   ni correr toolchains locales para compilar o dibujar.
 - `config/boards/shields/keyball61/keyball61_left.conf` y
