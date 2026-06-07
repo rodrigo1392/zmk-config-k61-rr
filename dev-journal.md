@@ -192,12 +192,14 @@ localmente.
 - Al 2026-06-07, `DEFAULT` bloquea el trackball desde
   `keyball61_right.overlay` agregando layer `0` a `trackball_lock`; el
   movimiento no debe activar `MOUSE` automaticamente.
-- La tecla MOUSE es la posicion 57: hold activa `MOUSE`, doble tap alterna
-  `MOUSE-T`. La tecla SCROLL es la posicion 56: hold activa `SCROLL`, doble tap
-  alterna `SCROLL-T`.
-- La posicion 58 es dual-role: hold activa `FUN` momentaneamente y tap envia
-  `SPACE`. En `FUN`, `M` dispara la macro de email y `SCROLL` sostenida activa
-  `SYM`.
+- Correccion importante de pulgares: fisicamente, la posicion 56 es `MOUSE`,
+  57 es `FUN` y 58 es `SPACE`; el mapeo anterior 56/57/58 como
+  `SCROLL/MOUSE/FUN` estaba corrido una tecla.
+- La tecla MOUSE es la posicion 56: hold activa `MOUSE`, doble tap alterna
+  `MOUSE-T`. La tecla a su izquierda, posicion 55, actua como `SCROLL` dentro
+  de `MOUSE`: hold activa `SCROLL`, doble tap alterna `SCROLL-T`.
+- La posicion 57 activa `FUN` momentaneamente. En `FUN`, `M` dispara la macro de
+  email y `SCROLL` sostenida activa `SYM`.
 - En `MOUSE` y `MOUSE-T` todo lo no listado usa `&none`. Quedan activos:
   `6/7/8/9/0` como volumen-/volumen+/play-pausa/prev/next, `A/S/D` como
   click derecho/medio/izquierdo, `F/V` como PgUp/PgDn, `;/,/.//` como

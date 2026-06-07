@@ -79,14 +79,6 @@
             bindings = <&mo>, <&td_mouse_t_lock>;
         };
 
-        fun_hold_space: fun_hold_space {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "hold-preferred";
-            bindings = <&mo>, <&kp>;
-        };
-
         sym_hold_toggle: sym_hold_toggle {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -111,7 +103,7 @@
 
         combo_thumb_lock {
             timeout-ms = <80>;
-            key-positions = <54 55 58>;
+            key-positions = <55 56 58>;
             bindings = <&tog LOCK>;
         };
 
@@ -135,24 +127,17 @@
             bindings = <&kp PLUS>;
         };
 
-        combo_mouse_left_space_enter {
-            timeout-ms = <80>;
-            key-positions = <55 57>;
-            layers = <DEFAULT MOUSE MOUSET>;
-            bindings = <&kp ENTER>;
-        };
-
         combo_mouse_right_space_enter {
             timeout-ms = <80>;
-            key-positions = <57 58>;
+            key-positions = <56 58>;
             layers = <DEFAULT MOUSE MOUSET>;
             bindings = <&kp ENTER>;
         };
 
         combo_fun_space_enter {
             timeout-ms = <80>;
-            key-positions = <55 58>;
-            layers = <FUN>;
+            key-positions = <57 58>;
+            layers = <DEFAULT FUN>;
             bindings = <&kp ENTER>;
         };
     };
@@ -167,7 +152,7 @@
 &kp TAB         &kp Q      &kp W         &kp E         &kp R   &kp T                                    &kp Y            &kp U   &kp I      &kp O    &kp P          &kp BACKSLASH
 &kp ESC         &kp A      &kp S         &kp D         &kp F   &kp G                                    &kp H            &kp J   &kp K      &kp L    &kp SEMI       &kp SQT
 &kp LEFT_SHIFT  &kp Z      &kp X         &kp C         &kp V   &kp B        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp N            &kp M   &kp COMMA  &kp DOT  &kp FSLH       &kp RIGHT_SHIFT
-&kp LCTRL       &kp LEFT_WIN  &kp LEFT_ALT  &kp MINUS  &kp SPACE  &kp SPACE  &scroll_hold_lock SCROLL 0  &scroll_hold_mouse_lock MOUSE 0    &fun_hold_space FUN SPACE                              &kp RIGHT_ALT  &kp ENTER
+&kp LCTRL       &kp LEFT_WIN  &kp LEFT_ALT  &kp MINUS  &kp SPACE  &kp SPACE  &scroll_hold_mouse_lock MOUSE 0  &mo FUN    &kp SPACE                              &kp RIGHT_ALT  &kp ENTER
             >;
         };
 
@@ -201,7 +186,7 @@
 &trans  &kp F1  &kp F2   &kp F3   &kp F4   &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans  &trans  &trans  &trans  &email_rodrigo  &trans  &trans  &trans  &trans
-&trans  &trans  &trans   &trans   &trans   &kp ENTER  &mo SYM  &trans  &trans                          &trans  &trans
+&trans  &trans  &trans   &trans   &trans   &mo SYM  &trans  &trans  &kp ENTER                          &trans  &trans
             >;
         };
 
@@ -212,7 +197,7 @@
 &none  &none        &none      &none    &none           &none                   &none        &none          &none      &none           &none      &none
 &none  &mkp RCLK     &mkp MCLK     &mkp LCLK   &kp PAGE_UP           &none                      &none      &none     &none   &none  &kp UP     &none
 &none  &none        &none        &none      &kp PAGE_DOWN    &none  &none  &none  &none  &none   &kp LEFT      &kp DOWN  &kp RIGHT  &none
-&none  &none        &none        &none      &none           &kp ENTER       &scroll_hold_lock SCROLL 0  &td_mouse_t_lock  &kp ENTER                                             &none      &none
+&none  &none        &none        &none      &none           &scroll_hold_lock SCROLL 0       &td_mouse_t_lock  &none  &kp ENTER                                             &none      &none
             >;
         };
 
@@ -245,7 +230,7 @@
 &none  &none        &none      &none    &none           &none                   &none        &none          &none      &none           &none      &none
 &none  &mkp RCLK     &mkp MCLK     &mkp LCLK   &kp PAGE_UP           &none                      &none      &none     &none   &none  &kp UP     &none
 &none  &none        &none        &none      &kp PAGE_DOWN    &none  &none  &none  &none  &none   &kp LEFT      &kp DOWN  &kp RIGHT  &none
-&none  &none        &none        &none      &none           &kp ENTER       &scroll_hold_lock SCROLL 0  &td_mouse_t_lock  &kp ENTER                                             &none      &none
+&none  &none        &none        &none      &none           &scroll_hold_lock SCROLL 0       &td_mouse_t_lock  &none  &kp ENTER                                             &none      &none
             >;
         };
 
