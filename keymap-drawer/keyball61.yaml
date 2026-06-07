@@ -57,9 +57,9 @@ layers:
   - {t: '-', s: _}
   - $$mdi:keyboard-space$$
   - $$mdi:keyboard-space$$
-  - {t: '&td_scroll_t_lock', h: SCROLL}
   - {t: '&td_mouse_t_lock', h: MOUSE}
-  - {t: '$$mdi:keyboard-space$$', h: FUN}
+  - FUN
+  - $$mdi:keyboard-space$$
   - $$mdi:apple-keyboard-option$$
   - {t: '$$mdi:keyboard-return$$', type: enter}
   NUM:
@@ -242,10 +242,10 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:keyboard-return$$', type: enter}
   - SYM
   - {t: '$$mdi:transfer$$', type: trans}
   - {type: held}
+  - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   MOUSE:
@@ -304,9 +304,9 @@ layers:
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
-  - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '&td_scroll_t_lock', h: SCROLL}
   - {t: '&td_mouse_t_lock', type: held}
+  - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
@@ -366,9 +366,9 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:keyboard-return$$', type: enter}
-  - {t: '$$mdi:keyboard-return$$', type: enter}
+  - {t: '$$mdi:keyboard-return$$', type: held}
   - {t: '&td_scroll_t_lock', type: held}
-  - {t: '&td_scroll_t_lock', type: held alternate}
+  - '&td_scroll_t_lock'
   - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '&td_sym_toggle', h: SYM}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -490,9 +490,9 @@ layers:
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
-  - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '&td_scroll_t_lock', h: SCROLL}
   - '&td_mouse_t_lock'
+  - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
@@ -683,7 +683,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
 combos:
-- p: [54, 55, 58]
+- p: [55, 56, 58]
   k: {t: LOCK, h: toggle}
 - p: [55, 57, 58]
   k: {t: LOCK, h: toggle}
@@ -693,12 +693,9 @@ combos:
 - p: [59, 9]
   k: +
   l: [QWRT]
-- p: [55, 57]
+- p: [56, 58]
   k: {t: '$$mdi:keyboard-return$$', type: enter}
   l: [QWRT, MOUSE, MOUSE-T]
 - p: [57, 58]
   k: {t: '$$mdi:keyboard-return$$', type: enter}
-  l: [QWRT, MOUSE, MOUSE-T]
-- p: [55, 58]
-  k: {t: '$$mdi:keyboard-return$$', type: enter}
-  l: [FUN]
+  l: [QWRT, FUN]
